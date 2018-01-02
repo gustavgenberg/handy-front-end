@@ -14,6 +14,20 @@ Makes it much easier handling the awesome canvas
 const canvas = new Canvas( id [ width, height, context ] );
 ```
 ```javascript
+// Drawing individual frames
+canvas.drawFrame(function ( rendererContext, handyObject ) {
+	
+	rendererContext.fillText('Hello', 10, 10);
+	
+});
+
+// Can also be reset and cleared easely for drawing new frames:
+canvas.reset();
+canvas.clear();
+
+```
+```javascript
+// Drawing speed adapted to clients capabilities
 // Catch the `draw` event. Functions is given arguments described in the Events section below.
 canvas.on( 'draw', function ( rendererContext, handyObject, delta ) {
 
