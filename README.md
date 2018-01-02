@@ -2,11 +2,11 @@
 Handy help scripts for a front-end developer
 
 
-###included:
+### included:
 
 Some handy scripts for a easier experience building the web
 
-#####Canvas.js
+##### Canvas.js
 Makes it much easier handling the awesome canvas
 
 ```javascript
@@ -29,12 +29,15 @@ canvas.on( 'draw', function ( rendererContext, handyObject, delta ) {
 Events:
 
 `draw` => rendererContext, handyObject, delta
+
 `update` => handyObject, delta
 
 `start` => rendererContext, handyObject
+
 `stop` => rendererContext, handyObject
 
 `pause` => rendererContext, handyObject
+
 `resume` => rendererContext, handyObject
 
 ```javascript
@@ -96,7 +99,7 @@ canvas.on('draw', function (rendererContext, handyObject, delta) {
 canvas.start();
 ```
 
-#####Pointer.js
+##### Pointer.js
 Script that keeps tracking the mouse pointer easy.
 
 ```javascript
