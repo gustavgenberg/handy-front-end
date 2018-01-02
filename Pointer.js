@@ -567,6 +567,7 @@ class Pointer {
 
     this.element.addEventListener('contextmenu', this.preventContextMenu);
 
+
   }
 
 
@@ -582,6 +583,7 @@ class Pointer {
      */
 
     this.element.removeEventListener('contextmenu', this.preventContextMenu);
+
 
   }
 
