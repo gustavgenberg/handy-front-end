@@ -1,12 +1,11 @@
 /**
- * Pointer.js
+ * Mouse pointer helper
  * by Gustav Genberg
- * https://github.com/GustavGenberg/handy-front-end/
  */
 
 
 /**
- * class Pointer
+ * class PointerListener
  */
 
 class Pointer {
@@ -418,7 +417,7 @@ class Pointer {
        * Trigger the event
        */
 
-      this.listeners.get(event).apply(null, this);
+      this.listeners.get(event).apply(null, [this]);
 
 
     }
