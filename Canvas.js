@@ -461,4 +461,28 @@ class Canvas {
   }
 
 
+  /**
+   * class function that returns base64 image of canvas
+   */
+
+  toImage (format) {
+
+
+    /**
+     * Set the default format
+     */
+
+    format = format || 'png';
+
+
+    /**
+     * return the base64 image
+     */
+     
+    return this.canvas.toDataURL('image/' + format);
+
+
+  }
+
+
 }
