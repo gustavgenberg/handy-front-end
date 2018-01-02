@@ -25,6 +25,10 @@ canvas.drawFrame(function ( rendererContext, handyObject ) {
 canvas.reset();
 canvas.clear();
 
+// Important note!
+// When the canvas element is resized, it will automatically clear its content!
+// Therefore the single frame drawing is not suitable for apps where the canvas element is resized (often fullscreen)!
+
 ```
 ```javascript
 // Drawing speed adapted to clients capabilities
