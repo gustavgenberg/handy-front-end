@@ -503,7 +503,7 @@ class Pointer {
    * class function for getting newest clickHistory entry
    */
 
-  getLatestClick () {
+  getLastClick () {
 
     return this.clickHistory[ this.clickHistory.length - 1 ] || null;
 
