@@ -43,7 +43,7 @@ class Canvas {
      * Pass the id
      */
 
-    this.id = this.canvas.id = arguments[0];
+    this.id = arguments[0];
 
 
     /**
@@ -51,6 +51,13 @@ class Canvas {
      */
 
     this.canvas = document.getElementById(this.id) ? document.getElementById(this.id) : document.createElement('canvas');
+
+
+    /**
+     * Set id of canvas
+     */
+
+    this.canvas.id = this.id;
 
 
     /**
@@ -123,6 +130,14 @@ class Canvas {
      */
 
     this._lastFrame = +new Date;
+
+
+    /**
+     * Make the reset and clear CanvasRenderingContext2D functions easy to use for single frame drawing
+     */
+
+    this.reset = this.renderer.reset.bind(this.renderer);
+    this.clear = this.renderer.clear.bind(this.renderer);
 
 
     /**
@@ -281,6 +296,22 @@ class Canvas {
 
     this._rafid = window.requestAnimationFrame(this._loop.bind(this), this.canvas);
 
+
+  }
+
+
+  /**
+   * class function that makes drawing single frames easy
+   */
+
+  drawFrame (fn) {
+
+
+    /**
+     * call the function with basic arguments
+     */
+
+    fn.bind(this)(this.renderer, this._SCOPE_);
 
   }
 
