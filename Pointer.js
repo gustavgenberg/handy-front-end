@@ -86,6 +86,13 @@ class Pointer {
 
 
       /**
+       * Fire `contextmenu` event
+       */
+
+      this.fireEvent('contextmenu', event);
+
+
+      /**
        * Prevent the context menu
        */
 
@@ -157,7 +164,14 @@ class Pointer {
          * y position relative to top left of window
          */
 
-        y: event.clientY
+        y: event.clientY,
+
+
+        /**
+         * raw event
+         */
+
+        evt: event
 
 
       };
@@ -171,10 +185,17 @@ class Pointer {
 
 
       /**
+       * Clear mouseup object
+       */
+
+      this.mouseup = { t: null, x: null, y: null };
+
+
+      /**
        * Fire the custom MOUSEDOWN event
        */
 
-      this.fireEvent('mousedown');
+      this.fireEvent('mousedown', obj);
 
 
     }.bind(this));
@@ -219,7 +240,14 @@ class Pointer {
          * y position relative to top of window
          */
 
-        y: event.clientY
+        y: event.clientY,
+
+
+        /**
+         * raw event
+         */
+
+        evt: event
 
 
       };
@@ -263,6 +291,13 @@ class Pointer {
 
 
         /**
+         * raw mousedown event
+         */
+
+        evt: this.mousedown.evt,
+
+
+        /**
          * x position of the mouseup
          * x position relative to left of window
          */
@@ -275,17 +310,31 @@ class Pointer {
          * y position relative to top of window
          */
 
-        endy: obj.y
+        endy: obj.y,
+
+
+        /**
+         * raw mouseup event
+         */
+
+        endevt: obj.evt
 
 
       });
 
 
       /**
+       * Clear mousedown object
+       */
+
+      this.mousedown = { t: null, x: null, y: null };
+
+
+      /**
        * Fire the custom MOUSEUP event
        */
 
-      this.fireEvent('mouseup');
+      this.fireEvent('mouseup', obj);
 
 
     }.bind(this));
@@ -338,7 +387,14 @@ class Pointer {
          * y position relative to top of window
          */
 
-        y: event.clientY
+        y: event.clientY,
+
+
+        /**
+         * raw event
+         */
+
+        evt: event
 
 
       };
@@ -372,7 +428,7 @@ class Pointer {
        * Fire the custom MOUSEMOVE event
        */
 
-      this.fireEvent('mousemove');
+      this.fireEvent('mousemove', obj);
 
 
     }.bind(this));
@@ -417,7 +473,7 @@ class Pointer {
        * Trigger the event
        */
 
-      this.listeners.get(event).apply(null, [this]);
+      this.listeners.get(event).apply(this, [arguments[1]]);
 
 
     }
@@ -438,6 +494,61 @@ class Pointer {
      */
 
     return this.buttonsDown.indexOf(button) > -1;
+
+
+  }
+
+
+  /**
+   * class function for getting newest clickHistory entry
+   */
+
+  getLatestClick () {
+
+    return this.clickHistory[ this.clickHistory.length - 1 ] || null;
+
+  }
+
+
+  /**
+   * class function that returns relative coordinates to an element
+   */
+
+  relative () {
+
+
+    /**
+     * Set default element
+     */
+
+    let element = this.element;
+
+
+    /**
+     * Check if element is provided, replace default element
+     */
+
+    if(arguments.length > 0) element = arguments[0];
+
+
+    /**
+     * Get element boundings for offset calculations
+     */
+
+    const elementBoundings = element.getBoundingClientRect();
+
+
+    /**
+     * Calculate and return
+     */
+
+    return {
+
+      element: element,
+      x: (arguments[1] ? arguments[1] : this.x) - elementBoundings.left,
+      y: (arguments[2] ? arguments[2] : this.y) - elementBoundings.top
+
+    };
 
 
   }
