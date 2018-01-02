@@ -118,7 +118,7 @@ pointer.y
 pointer.path
 // Get the "closest" element (like p)
 pointer.path[0]
-// Get the "faraway" element (like body, html)
+// Get "faraway" element (like body, html)
 pointer.path[.. > 0]
 
 // returns undefined if not known
