@@ -74,6 +74,11 @@ canvas.pause();
 
 // Resume update loop
 canvas.resume();
+
+
+// Get base64 image of canvas
+canvas.toImage( [ format ] ); // format default is png
+
 ```
 ```javascript
 //functions added to window.CanvasRenderingContext2D:
