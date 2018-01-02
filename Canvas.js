@@ -178,6 +178,12 @@ class Canvas {
     this.eventListeners.set(event, fn);
 
 
+    /**
+     * return the instance
+     */
+
+    return this;
+
   }
 
 
@@ -478,7 +484,7 @@ class Canvas {
     /**
      * return the base64 image
      */
-     
+
     return this.canvas.toDataURL('image/' + format);
 
 
