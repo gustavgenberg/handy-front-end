@@ -22,6 +22,8 @@ canvas.on( 'draw', function ( rendererContext, handyObject, delta ) {
 	// delta
 
 	rendererContext.fillText('Hello', 10, 10);
+	
+	// in every event callback, the `this` keyword is referring to the instance
 
 });
 ```
