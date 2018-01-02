@@ -16,7 +16,7 @@
  * Helper functions for window.CanvasRenderingContext2D
  */
 
-window.CanvasRenderingContext2D&&(CanvasRenderingContext2D.prototype.reset=function(){this.setTransform(1,0,0,1,0,0)},CanvasRenderingContext2D.prototype.clear=function(){this.clearRect(0,0,this.canvas.width,this.canvas.height)});
+window.CanvasRenderingContext2D&&(CanvasRenderingContext2D.prototype.reset=function(){this.setTransform(1,0,0,1,0,0)},CanvasRenderingContext2D.prototype.clear=function(preserveTransform){if(preserveTransform){this.save();this.reset();}this.clearRect(0,0,this.canvas.width,this.canvas.height);if(preserveTransform){this.restore()}});
 
 
 /**
