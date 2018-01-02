@@ -23,7 +23,7 @@ canvas.drawFrame(function ( rendererContext, handyObject ) {
 
 // Can also be reset and cleared easely for drawing new frames:
 canvas.reset();
-canvas.clear();
+canvas.clear( [ bool preserveTransform ] );
 
 // Important note!
 // When the canvas element is resized, it will automatically clear its content!
