@@ -8,6 +8,8 @@ Some handy scripts for a easier experience building the web
 
 ##### Canvas.js
 Makes it much easier handling the awesome canvas
+Script link:
+[https://gustavgenberg.github.io/handy-front-end/Canvas.js](https://gustavgenberg.github.io/handy-front-end/Canvas.js)
 
 ```javascript
 // Initialize
@@ -126,6 +128,8 @@ canvas.start();
 
 ##### Pointer.js
 Script that keeps tracking the mouse pointer easy.
+Script link:
+[https://gustavgenberg.github.io/handy-front-end/Pointer.js](https://gustavgenberg.github.io/handy-front-end/Pointer.js)
 
 ```javascript
 // Initialize
