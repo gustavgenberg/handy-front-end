@@ -1,6 +1,7 @@
 /**
- * Mouse pointer helper
+ * Pointer.js
  * by Gustav Genberg
+ * https://github.com/GustavGenberg/handy-front-end/
  */
 
 
