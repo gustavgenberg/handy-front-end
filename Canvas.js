@@ -724,7 +724,7 @@ class Canvas {
      * check if it exists and if it is an object
      */
 
-    if(!handyObject || typeof handyObject !== 'object') return false;
+    if(!handyObject) return false;
 
 
     /**
