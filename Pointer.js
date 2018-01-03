@@ -1,6 +1,7 @@
 /**
- * Mouse pointer helper
+ * Canvas.js
  * by Gustav Genberg
+ * https://github.com/GustavGenberg/handy-front-end/
  */
 
 
