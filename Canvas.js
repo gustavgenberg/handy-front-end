@@ -733,7 +733,14 @@ class Canvas {
 
     window.localStorage.removeItem('canvas-' + key);
 
-    
+
+    /**
+     * return true
+     */
+
+    return true;
+
+
   }
 
 
