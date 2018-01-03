@@ -55,6 +55,8 @@ canvas.on( 'draw', function ( rendererContext, handyObject, delta, now ) {
 
 Events:
 
+`init` => handyObject
+
 `draw` => rendererContext, handyObject, delta, now (performance.now)
 
 `update` => handyObject, delta, now (performance.now)
