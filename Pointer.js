@@ -636,6 +636,13 @@ class Pointer {
     this.element.addEventListener('contextmenu', this.preventContextMenu);
 
 
+    /**
+     * return the instance
+     */
+
+    return this;
+
+
   }
 
 
@@ -652,6 +659,13 @@ class Pointer {
 
     this.element.removeEventListener('contextmenu', this.preventContextMenu);
 
+
+    /**
+     * return the instance
+     */
+
+    return this;
+    
 
   }
 
