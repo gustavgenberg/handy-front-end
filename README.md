@@ -104,7 +104,7 @@ reset(); // resets the transform made on canvas
 const canvas = new Canvas('my-canvas', 500, 500);
 
 // Catch `start` event
-canvas.on('start', function (renderingContext, handyObject) {
+canvas.on('start', function (renderingContext, handyObject, now) {
 
 	// set start position
 	handyObject.x = 5;
@@ -136,7 +136,7 @@ canvas.start();
 // Full example with the start event fired directly on initialization
 
 // Initialize
-const canvas = new Canvas('my-canvas', 500, 500).start(function (renderingContext, handyObject) {
+const canvas = new Canvas('my-canvas', 500, 500).start(function (renderingContext, handyObject, now) {
 
 	// set start position
 	handyObject.x = 5;
