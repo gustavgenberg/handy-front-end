@@ -4,7 +4,10 @@ Handy help scripts for a front-end developer
 
 ### included:
 
-Some handy scripts for a easier experience building the web
+Some handy scripts for a easier experience building the web:
+
+- [Canvas.js](#canvasjs)
+- [Pointer.js](#pointerjs)
 
 ##### Canvas.js
 Makes it much easier handling the awesome canvas
