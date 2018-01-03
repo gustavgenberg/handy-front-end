@@ -61,13 +61,13 @@ Events:
 
 `update` => handyObject, delta, now (performance.now)
 
-`start` => rendererContext, handyObject
+`start` => rendererContext, handyObject, now (performance.now)
 
-`stop` => rendererContext, handyObject
+`stop` => rendererContext, handyObject, now (performance.now)
 
-`pause` => rendererContext, handyObject
+`pause` => rendererContext, handyObject, now (performance.now)
 
-`resume` => rendererContext, handyObject
+`resume` => rendererContext, handyObject, now (performance.now)
 
 ```javascript
 // Functions
