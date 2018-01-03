@@ -354,7 +354,7 @@ class Canvas {
      * Fire the `start` event
      */
 
-    this.fireEvent('start', this.renderer, this._SCOPE_);
+    this.fireEvent('start', this.renderer, this._SCOPE_, performance.now());
 
 
     /**
@@ -392,7 +392,7 @@ class Canvas {
      * fire the `stop` event
      */
 
-    this.fireEvent('stop', this.renderer, this._SCOPE_);
+    this.fireEvent('stop', this.renderer, this._SCOPE_, performance.now());
 
 
     /**
@@ -430,7 +430,7 @@ class Canvas {
      * fire the `pause` event
      */
 
-    this.fireEvent('pause', this.renderer, this._SCOPE_);
+    this.fireEvent('pause', this.renderer, this._SCOPE_, performance.now());
 
 
     /**
@@ -461,7 +461,7 @@ class Canvas {
      * fire the `resume` event
      */
 
-    this.fireEvent('resume', this.renderer, this._SCOPE_);
+    this.fireEvent('resume', this.renderer, this._SCOPE_, performance.now());
 
 
     /**
