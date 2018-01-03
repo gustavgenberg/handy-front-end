@@ -187,6 +187,12 @@ pointer.on( 'contextmenu', function (raw event) {
 
 });
 
+// get relative pointer position of element
+pointer.relative(); => {element: Pointer.element, x: xpos relative to element, y: ypos relative to element}
+
+// get relative position of provided element
+pointer.relative(element, x, y); => same ^
+
 
 new Pointer() =>
 
@@ -199,8 +205,8 @@ buttonsDown: []
 clickHistory: []
 element: [default window]
 listeners: Map(0) {}
-mousedown: {t: null, x: null, y: null, button: null, evt: null} // when mouse button is down this is the object when the mouse button was pressed
-mouseup: {t: null, x: null, y: null, button: null, evt: null} // same but for mouseup
+mousedown: {} // mousedown[Pointer.BTN_*] when mouse button is down this is the object when the mouse button was pressed
+mouseup: {} // same but for mouseup
 moveHistory: [] // last 1000 mousemoves
 path: null // last mousemove's event.path
 preventContextMenu: ƒunction
