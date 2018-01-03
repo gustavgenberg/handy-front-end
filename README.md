@@ -137,7 +137,7 @@ Script link:
 
 ```javascript
 // Initialize
-const pointer = new Pointer( [ element ] );
+const pointer = new Pointer( [ element (default window) ] );
 
 // Get mouse x
 pointer.x
