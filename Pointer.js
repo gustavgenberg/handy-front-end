@@ -6,7 +6,7 @@
 
 
 /**
- * class PointerListener
+ * class Pointer
  */
 
 class Pointer {
