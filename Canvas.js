@@ -13,6 +13,13 @@
 
 
 /**
+ * Simple performance.now polyfill
+ */
+
+!function(n){n.performance||(n.performance={now:function(){return+new Date}})}(this);
+
+
+/**
  * Helper functions for window.CanvasRenderingContext2D
  */
 
@@ -129,7 +136,7 @@ class Canvas {
      * The previous frame timestamp, used for delta calculations
      */
 
-    this._lastFrame = +new Date;
+    this._lastFrame = null;
 
 
     /**
@@ -277,7 +284,7 @@ class Canvas {
      * calculate the delta betweek previous loop
      */
 
-    const now = +new Date;
+    const now = performance.now();
     const delta = (now - this._lastFrame) / 1000.0;
     this._lastFrame = now;
 
@@ -340,7 +347,7 @@ class Canvas {
      * guess the previous frame timestamp at start which maximizes delta accuricy
      */
 
-    this._lastFrame = +new Date - 16;
+    this._lastFrame = performance.now() - 16;
 
 
     /**
