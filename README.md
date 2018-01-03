@@ -40,7 +40,7 @@ canvas.clear( [ bool preserveTransform ] );
 ```javascript
 // Drawing speed adapted to clients capabilities
 // Catch the `draw` event. Functions is given arguments described in the Events section below.
-canvas.on( 'draw', function ( rendererContext, handyObject, delta ) {
+canvas.on( 'draw', function ( rendererContext, handyObject, delta, now ) {
 
 	// rendererContext : provided rendererContext ( default CanvasRenderingContext2D )
 	// handyObject : object that is available in all event callback functions. very handy!
@@ -55,9 +55,9 @@ canvas.on( 'draw', function ( rendererContext, handyObject, delta ) {
 
 Events:
 
-`draw` => rendererContext, handyObject, delta
+`draw` => rendererContext, handyObject, delta, now (performance.now)
 
-`update` => handyObject, delta
+`update` => handyObject, delta, now (performance.now)
 
 `start` => rendererContext, handyObject
 
