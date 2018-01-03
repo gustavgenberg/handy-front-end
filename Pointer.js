@@ -74,7 +74,7 @@ class Pointer {
      * clickHistory will hold every click made by the user, aswell as the coordinates when the mouseup event is triggered.
      */
 
-    this.history = [];
+    this.moveHistory = [];
     this.clickHistory = [];
 
 
@@ -401,24 +401,24 @@ class Pointer {
 
 
       /**
-       * Save the MOUSEMOVE event in history
+       * Save the MOUSEMOVE event in moveHistory
        */
 
-      this.history.push(obj);
+      this.moveHistory.push(obj);
 
 
       /**
        * If the history contains more than 1000 items, remove the first one ( keeping it on 1000 by removing oldest entry )
        */
 
-      if(this.history.length > 1000) {
+      if(this.moveHistory.length > 1000) {
 
 
         /**
          * Remove the first entry of the array
          */
 
-        this.history.shift();
+        this.moveHistory.shift();
 
 
       }
@@ -505,7 +505,13 @@ class Pointer {
 
   getLastClick () {
 
+
+    /**
+     * return last click if it exists
+     */
+
     return this.clickHistory[ this.clickHistory.length - 1 ] || null;
+
 
   }
 
@@ -521,7 +527,7 @@ class Pointer {
      * Set default element
      */
 
-    let element = this.element;
+    let element = this.element == window ? window.document.body : this.element;
 
 
     /**
@@ -544,9 +550,11 @@ class Pointer {
 
     return {
 
+
       element: element,
-      x: (arguments[1] ? arguments[1] : this.x) - elementBoundings.left,
-      y: (arguments[2] ? arguments[2] : this.y) - elementBoundings.top
+      x: this.x == null ? null : (arguments[1] ? arguments[1] : this.x) - elementBoundings.left,
+      y: this.y == null ? null : (arguments[2] ? arguments[2] : this.y) - elementBoundings.top
+
 
     };
 
