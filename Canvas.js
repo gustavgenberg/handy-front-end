@@ -155,7 +155,7 @@ class Canvas {
 
 
     /**
-     * Fire the custom `setup` event
+     * Fire the custom `init` event
      */
 
     this.fireEvent('init', this.renderer, this._HANDYOBJECT_, performance.now());
@@ -329,6 +329,7 @@ class Canvas {
      */
 
     fn.bind(this)(this.renderer, this._HANDYOBJECT_);
+
 
   }
 
@@ -555,7 +556,7 @@ class Canvas {
 
 
     /**
-     * return if the key doesn't exist
+     * check if image exists
      */
 
     if(!base64) return false;
