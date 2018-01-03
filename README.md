@@ -131,6 +131,36 @@ canvas.on('draw', function (rendererContext, handyObject, delta) {
 });
 
 canvas.start();
+
+
+// Full example with the start event fired directly on initialization
+
+// Initialize
+const canvas = new Canvas('my-canvas', 500, 500).start(function (renderingContext, handyObject) {
+
+	// set start position
+	handyObject.x = 5;
+
+});
+
+// Catch `update` event aka update loop, logic loop, game loop (clientside)
+canvas.on('update', function (handyObject, delta) {
+
+	// Use delta to move object, making sure object moves equally fast no matter the framerate (except 0 heh.. no moving at all)
+	handyObject.x += 100 * delta;
+
+});
+
+// Catch the `draw` loop
+canvas.on('draw', function (rendererContext, handyObject, delta) {
+
+	// Clear the whole canvas
+	rendererContext.clear();
+
+	// Draw moving rectangle
+	rendererContext.fillRect(handyObject.x, 10, 10, 10);
+
+});
 ```
 
 ## Pointer.js
