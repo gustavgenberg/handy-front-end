@@ -108,7 +108,7 @@ class Canvas {
      * The handyObject
      */
 
-    this._SCOPE_ = {};
+    this._HANDYOBJECT_ = {};
 
 
     /**
@@ -158,7 +158,7 @@ class Canvas {
      * Fire the custom `setup` event
      */
 
-    this.fireEvent('init', this.renderer, this._SCOPE_, performance.now());
+    this.fireEvent('init', this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
@@ -252,9 +252,13 @@ class Canvas {
          * The default scene
          */
 
+        renderer.save();
+
         renderer.textAlign = 'center';
         renderer.font = '30px Arial';
         renderer.fillText('Its Working!', this.width / 2, this.height / 2);
+
+        renderer.restore();
 
 
       }
@@ -293,14 +297,14 @@ class Canvas {
      * If the update loop is not paused, fire the `update` event
      */
 
-    if(!this._paused) this.fireEvent('update', this._SCOPE_, delta, performance.now());
+    if(!this._paused) this.fireEvent('update', this._HANDYOBJECT_, delta, performance.now());
 
 
     /**
      * Fire the `draw` event
      */
 
-    this.fireEvent('draw', this.renderer, this._SCOPE_, delta, performance.now());
+    this.fireEvent('draw', this.renderer, this._HANDYOBJECT_, delta, performance.now());
 
 
     /**
@@ -324,7 +328,7 @@ class Canvas {
      * call the function with basic arguments
      */
 
-    fn.bind(this)(this.renderer, this._SCOPE_);
+    fn.bind(this)(this.renderer, this._HANDYOBJECT_);
 
   }
 
@@ -354,14 +358,14 @@ class Canvas {
      * Fire the `start` event
      */
 
-    this.fireEvent('start', this.renderer, this._SCOPE_, performance.now());
+    this.fireEvent('start', this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
      * Callback
      */
 
-    if(callback) callback(this.renderer, this._SCOPE_, performance.now());
+    if(callback) callback(this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
@@ -399,7 +403,7 @@ class Canvas {
      * fire the `stop` event
      */
 
-    this.fireEvent('stop', this.renderer, this._SCOPE_, performance.now());
+    this.fireEvent('stop', this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
@@ -437,7 +441,7 @@ class Canvas {
      * fire the `pause` event
      */
 
-    this.fireEvent('pause', this.renderer, this._SCOPE_, performance.now());
+    this.fireEvent('pause', this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
@@ -468,7 +472,7 @@ class Canvas {
      * fire the `resume` event
      */
 
-    this.fireEvent('resume', this.renderer, this._SCOPE_, performance.now());
+    this.fireEvent('resume', this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
