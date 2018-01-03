@@ -69,6 +69,13 @@ Events:
 
 `resume` => rendererContext, handyObject, now (performance.now)
 
+The `handyObject` is an object that is available inside all canvas events. Very handy!
+
+It can be retrieved from outside:
+```javascript
+canvas.getObject();
+```
+
 ```javascript
 // Functions
 
