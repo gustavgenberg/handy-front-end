@@ -158,7 +158,7 @@ class Canvas {
      * Fire the custom `setup` event
      */
 
-    this.fireEvent('init', this._SCOPE_, performance.now());
+    this.fireEvent('init', this.renderer, this._SCOPE_, performance.now());
 
 
     /**
