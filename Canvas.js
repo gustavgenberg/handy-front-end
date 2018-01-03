@@ -535,6 +535,51 @@ class Canvas {
 
 
   /**
+   * class function that removes canvas state from storage
+   */
+
+  removeFromStorage (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'Canvas';
+
+
+    /**
+     * get base 64
+     */
+
+    const base64 = window.localStorage.getItem('canvas-' + key);
+
+
+    /**
+     * check if image exists
+     */
+
+    if(!base64) return false;
+
+
+    /**
+     * remove the item
+     */
+
+    window.localStorage.removeItem('canvas-' + key);
+
+
+    /**
+     * return true
+     */
+
+    return true;
+
+
+  }
+
+
+  /**
    * class function that writes canvas image from localStorage
    */
 
