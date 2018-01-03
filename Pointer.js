@@ -122,6 +122,14 @@ class Pointer {
 
     this.bindElementListeners();
 
+
+    /**
+     * return the instance
+     */
+
+    return this;
+
+
   };
 
 
@@ -475,6 +483,13 @@ class Pointer {
     this.listeners.set(event, fn);
 
 
+    /**
+     * return the instance
+     */
+
+    return this;
+
+
   }
 
 
@@ -483,6 +498,13 @@ class Pointer {
    */
 
   fireEvent (event) {
+
+
+    /**
+     * Check arguments.length
+     */
+
+    if(arguments.length !== 2) return;
 
 
     /**
