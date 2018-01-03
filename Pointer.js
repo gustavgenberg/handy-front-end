@@ -87,6 +87,8 @@ class Pointer {
      * Function that disables the right-click menu
      */
 
+    const _p = this;
+
     this.preventContextMenu = function (event) {
 
 
@@ -94,7 +96,7 @@ class Pointer {
        * Fire `contextmenu` event
        */
 
-      this.fireEvent('contextmenu', event);
+      _p.fireEvent('contextmenu', event);
 
 
       /**
@@ -120,7 +122,7 @@ class Pointer {
 
     this.bindElementListeners();
 
-  }
+  };
 
 
   /**
@@ -602,7 +604,7 @@ class Pointer {
      * Add event listener
      */
 
-    this.element.addEventListener('contextmenu', this.preventContextMenu.bind(this));
+    this.element.addEventListener('contextmenu', this.preventContextMenu);
 
 
   }
@@ -619,7 +621,7 @@ class Pointer {
      * Remvoe event listener
      */
 
-    this.element.removeEventListener('contextmenu', this.preventContextMenu.bind(this));
+    this.element.removeEventListener('contextmenu', this.preventContextMenu);
 
 
   }
