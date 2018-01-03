@@ -1,6 +1,9 @@
 # handy-front-end
 Handy help scripts for a front-end developer
 
+Github repo:
+[https://github.com/GustavGenberg/handy-front-end](https://github.com/GustavGenberg/handy-front-end)
+
 
 ### included:
 
