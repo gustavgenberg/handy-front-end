@@ -143,7 +143,7 @@ class Pointer {
        * Add button to the list
        */
 
-      this.buttonsDown.push(event.button);
+      if(!this.isDown(event.button)) this.buttonsDown.push(event.button);
 
 
       /**
@@ -172,6 +172,13 @@ class Pointer {
          */
 
         y: event.clientY,
+
+
+        /**
+         * button down
+         */
+
+        button: event.button,
 
 
         /**
@@ -213,7 +220,7 @@ class Pointer {
        * Remove button from the list
        */
 
-      this.buttonsDown.splice( this.buttonsDown.indexOf(event.button), 1 );
+      if(this.isDown(event.button)) this.buttonsDown.splice( this.buttonsDown.indexOf(event.button), 1 );
 
 
       /**
