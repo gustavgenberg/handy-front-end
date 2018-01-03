@@ -54,11 +54,15 @@ class Pointer {
 
 
     /**
-     * variables that golds the latest known mousedown and mouseup coordinates aswell as the timestamp
+     * variables that holds the latest known mousedown and mouseup coordinates aswell as the timestamp for each button
      */
 
-    this.mousedown = { t: null, x: null, y: null, evt: null };
-    this.mouseup = { t: null, x: null, y: null, evt: null };
+    this.mousedown = {};
+    this.mouseup = {};
+
+    [this.BTN_LEFT, this.BTN_MIDDLE, this.BTN_RIGHT].forEach(function (button) {
+      this.mousedown[button] = this.mouseup[button] = { t: null, x: null, y: null, evt: null };
+    }.bind(this));
 
 
     /**
@@ -179,17 +183,11 @@ class Pointer {
 
 
       /**
-       * Save the object
+       * Update objects
        */
 
-      this.mousedown = obj;
-
-
-      /**
-       * Clear mouseup object
-       */
-
-      this.mouseup = { t: null, x: null, y: null };
+      this.mousedown[event.button] = obj;
+      this.mouseup[event.button] = { t: null, x: null, y: null, button: null, evt: null };
 
 
       /**
@@ -245,6 +243,13 @@ class Pointer {
 
 
         /**
+         * the clicked button
+         */
+
+        button: event.button,
+
+
+        /**
          * raw event
          */
 
@@ -252,13 +257,6 @@ class Pointer {
 
 
       };
-
-
-      /**
-       * Save the object
-       */
-
-      this.mouseup = obj;
 
 
       /**
@@ -280,7 +278,7 @@ class Pointer {
          * x position relative to left of window
          */
 
-        x: this.mousedown.x,
+        x: this.mousedown[event.button].x,
 
 
         /**
@@ -288,14 +286,21 @@ class Pointer {
          * y position relative to top of window
          */
 
-        y: this.mousedown.y,
+        y: this.mousedown[event.button].y,
+
+
+        /**
+         * clicked button
+         */
+
+        button: event.button,
 
 
         /**
          * raw mousedown event
          */
 
-        evt: this.mousedown.evt,
+        evt: this.mousedown[event.button].evt,
 
 
         /**
@@ -325,10 +330,11 @@ class Pointer {
 
 
       /**
-       * Clear mousedown object
+       * Update objects
        */
 
-      this.mousedown = { t: null, x: null, y: null };
+      this.mouseup[event.button] = obj;
+      this.mousedown[event.button] = { t: null, x: null, y: null, button: null, evt: null };
 
 
       /**
@@ -389,6 +395,13 @@ class Pointer {
          */
 
         y: event.clientY,
+
+
+        /**
+         * buttons down
+         */
+
+        buttons: this.buttonsDown,
 
 
         /**
@@ -501,18 +514,34 @@ class Pointer {
 
 
   /**
-   * class function for getting newest clickHistory entry
+   * class function for getting newest clickHistory entry with matching button
    */
 
-  getLastClick () {
+  getLastClick (button) {
+
+console.log(button, this.clickHistory);
+    /**
+     * check if there has been any clicks
+     */
+
+    if(this.clickHistory.length == 0) return null;
 
 
     /**
-     * return last click if it exists
+     * Loop back from the newest and check button type
      */
 
-    return this.clickHistory[ this.clickHistory.length - 1 ] || null;
+    for(let i = this.clickHistory.length - 1; i >= 0; i--)
+      if(this.clickHistory[i].button == button || !button)
+        return this.clickHistory[i];
 
+    console.log(button, this.clickHistory);
+
+    /**
+     * No match, return null
+     */
+
+    return null;
 
   }
 
@@ -574,7 +603,7 @@ class Pointer {
      * Add event listener
      */
 
-    this.element.addEventListener('contextmenu', this.preventContextMenu);
+    this.element.addEventListener('contextmenu', this.preventContextMenu.bind(this));
 
 
   }
@@ -591,7 +620,7 @@ class Pointer {
      * Remvoe event listener
      */
 
-    this.element.removeEventListener('contextmenu', this.preventContextMenu);
+    this.element.removeEventListener('contextmenu', this.preventContextMenu.bind(this));
 
 
   }
