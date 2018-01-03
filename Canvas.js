@@ -366,7 +366,7 @@ class Canvas {
      * Callback
      */
 
-    if(callback) callback(this.renderer, this._HANDYOBJECT_, performance.now());
+    if(callback) callback.bind(this)(this.renderer, this._HANDYOBJECT_, performance.now());
 
 
     /**
@@ -648,7 +648,7 @@ class Canvas {
      * save the handyObject
      */
 
-    window.localStorage.setItem('canvas-' + key, this.getObject());
+    window.localStorage.setItem('canvas-' + key, JSON.stringify(this.getObject()));
 
 
   }
@@ -672,7 +672,7 @@ class Canvas {
      * get handyObject from storage
      */
 
-    const handyObject = window.localStorage.getItem('canvas-' + key);
+    const handyObject = JSON.parse(window.localStorage.getItem('canvas-' + key));
 
 
     /**
