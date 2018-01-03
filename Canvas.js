@@ -558,7 +558,7 @@ class Canvas {
      * return if the key doesn't exist
      */
 
-    return false;
+    if(!base64) return false;
 
 
     /**
