@@ -175,11 +175,11 @@ pointer.disableContextMenu();
 pointer.enableContextMenu();
 
 // Get newest clickHistory entry
-pointer.getLastClick(); // => {t, x, y, endx, endy} t = timestamp x,y is the mousedown pos and endx,endy is the mouseup pos.
+pointer.getLastClick(); // => {t, x, y, evt, endx, endy, endevt} t = timestamp x,y is the mousedown pos and endx,endy is the mouseup pos.
 
 // add event listener
-pointer.on( 'mousedown'/'mouseup'/'mousemove' , function (event) {
-	// event => {t: timestamp, x: x-pos, y: y-pos, evt: raw event}
+pointer.on( 'down'/'up'/'move' , function (event) {
+	// event => {t: timestamp, x: x-pos, y: y-pos, [ down/up : button ], evt: raw event}
 });
 
 // oncontextmenu of Pointer.element
@@ -199,8 +199,8 @@ buttonsDown: []
 clickHistory: []
 element: [default window]
 listeners: Map(0) {}
-mousedown: {t: null, x: null, y: null, evt: null}
-mouseup: {t: null, x: null, y: null, evt: null}
+mousedown: {t: null, x: null, y: null, button: null, evt: null} // when mouse button is down this is the object when the mouse button was pressed
+mouseup: {t: null, x: null, y: null, button: null, evt: null} // same but for mouseup
 moveHistory: [] // last 1000 mousemoves
 path: null // last mousemove's event.path
 preventContextMenu: ƒunction
