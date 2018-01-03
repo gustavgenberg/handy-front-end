@@ -57,36 +57,36 @@ class Canvas {
      * Assign the canvas
      */
 
-    this.canvas = document.getElementById(this.id) ? document.getElementById(this.id) : document.createElement('canvas');
+    this.element = document.getElementById(this.id) ? document.getElementById(this.id) : document.createElement('canvas');
 
 
     /**
      * Set id of canvas
      */
 
-    this.canvas.id = this.id;
+    this.element.id = this.id;
 
 
     /**
      * Get the rendererContext
      */
 
-    this.renderer = this.canvas.ctx = this.canvas.getContext(arguments[3] || '2d');
+    this.renderer = this.element.ctx = this.element.getContext(arguments[3] || '2d');
 
 
     /**
      * If canvas not exists in body append it
      */
 
-    if(!document.getElementById(this.id)) document.body.appendChild(this.canvas);
+    if(!document.getElementById(this.id)) document.body.appendChild(this.element);
 
 
     /**
      * Pass the width and the height
      */
 
-    this.width = this.canvas.width = arguments[1] || this.canvas.width;
-    this.height = this.canvas.height = arguments[2] || this.canvas.height;
+    this.width = this.element.width = arguments[1] || this.element.width;
+    this.height = this.element.height = arguments[2] || this.element.height;
 
 
     /**
@@ -94,7 +94,7 @@ class Canvas {
      */
 
     if(arguments[1] == window.innerWidth && arguments[2] == window.innerHeight)
-      window.addEventListener('resize', function () { this.width = this.canvas.width = window.innerWidth; this.height = this.canvas.height = window.innerHeight; }.bind(this));
+      window.addEventListener('resize', function () { this.width = this.element.width = window.innerWidth; this.height = this.element.height = window.innerHeight; }.bind(this));
 
 
     /**
@@ -311,7 +311,7 @@ class Canvas {
      * Request the next frame
      */
 
-    this._rafid = window.requestAnimationFrame(this._loop.bind(this), this.canvas);
+    this._rafid = window.requestAnimationFrame(this._loop.bind(this), this.element);
 
 
   }
@@ -504,7 +504,7 @@ class Canvas {
      * return the base64 image
      */
 
-    return this.canvas.toDataURL('image/' + format);
+    return this.element.toDataURL('image/' + format);
 
 
   }
@@ -608,6 +608,92 @@ class Canvas {
      */
 
     return true;
+
+
+  }
+
+
+  /**
+   * class function that returns the handyObject
+   */
+
+  getObject () {
+
+
+    /**
+     * return the handyObject
+     */
+
+    return this._HANDYOBJECT_;
+
+
+  }
+
+
+  /**
+   * class function that saves the handyObject
+   */
+
+  saveObject (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'HO';
+
+
+    /**
+     * save the handyObject
+     */
+
+    window.localStorage.setItem('canvas-' + key, this.getObject());
+
+
+  }
+
+
+  /**
+   * class function that loads the handyObject from storage
+   */
+
+  loadObject (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'HO';
+
+
+    /**
+     * get handyObject from storage
+     */
+
+    const handyObject = window.localStorage.getItem('canvas-' + key);
+
+
+    /**
+     * check if it exists and if it is an object
+     */
+
+    if(!handyObject || typeof handyObject !== 'object') return false;
+
+
+    /**
+     * update current handyObject
+     */
+
+    this._HANDYOBJECT_ = handyObject;
+
+
+    /**
+     * return handyObject
+     */
+
+    return this._HANDYOBJECT_;
 
 
   }
