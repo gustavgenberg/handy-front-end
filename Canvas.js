@@ -1,7 +1,7 @@
 /**
  * Canvas.js
  * by Gustav Genberg
- * https://github.com/GustavGenberg/handy-front-end/
+ * https://github.com/GustavGenberg/handy-front-end#canvasjs
  */
 
 
