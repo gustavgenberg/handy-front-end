@@ -9,7 +9,7 @@ Some handy scripts for a easier experience building the web:
 - [Canvas.js](#canvasjs)
 - [Pointer.js](#pointerjs)
 
-##### Canvas.js
+## Canvas.js
 Makes it much easier handling the awesome canvas
 
 Script link:
@@ -131,7 +131,7 @@ canvas.on('draw', function (rendererContext, handyObject, delta) {
 canvas.start();
 ```
 
-##### Pointer.js
+## Pointer.js
 Script that keeps tracking the mouse pointer easy.
 
 Script link:
