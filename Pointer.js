@@ -56,8 +56,8 @@ class Pointer {
      * variables that golds the latest known mousedown and mouseup coordinates aswell as the timestamp
      */
 
-    this.mousedown = { t: null, x: null, y: null };
-    this.mouseup = { t: null, x: null, y: null };
+    this.mousedown = { t: null, x: null, y: null, evt: null };
+    this.mouseup = { t: null, x: null, y: null, evt: null };
 
 
     /**
@@ -195,7 +195,7 @@ class Pointer {
        * Fire the custom MOUSEDOWN event
        */
 
-      this.fireEvent('mousedown', obj);
+      this.fireEvent('down', obj);
 
 
     }.bind(this));
@@ -334,7 +334,7 @@ class Pointer {
        * Fire the custom MOUSEUP event
        */
 
-      this.fireEvent('mouseup', obj);
+      this.fireEvent('up', obj);
 
 
     }.bind(this));
@@ -428,7 +428,7 @@ class Pointer {
        * Fire the custom MOUSEMOVE event
        */
 
-      this.fireEvent('mousemove', obj);
+      this.fireEvent('move', obj);
 
 
     }.bind(this));
