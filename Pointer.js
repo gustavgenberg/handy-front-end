@@ -519,7 +519,7 @@ class Pointer {
 
   getLastClick (button) {
 
-console.log(button, this.clickHistory);
+
     /**
      * check if there has been any clicks
      */
@@ -535,7 +535,6 @@ console.log(button, this.clickHistory);
       if(this.clickHistory[i].button == button || !button)
         return this.clickHistory[i];
 
-    console.log(button, this.clickHistory);
 
     /**
      * No match, return null
