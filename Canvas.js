@@ -293,14 +293,14 @@ class Canvas {
      * If the update loop is not paused, fire the `update` event
      */
 
-    if(!this._paused) this.fireEvent('update', this._SCOPE_, delta);
+    if(!this._paused) this.fireEvent('update', this._SCOPE_, delta, performance.now());
 
 
     /**
      * Fire the `draw` event
      */
 
-    this.fireEvent('draw', this.renderer, this._SCOPE_, delta);
+    this.fireEvent('draw', this.renderer, this._SCOPE_, delta, performance.now());
 
 
     /**
