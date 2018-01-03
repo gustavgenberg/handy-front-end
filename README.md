@@ -170,4 +170,51 @@ pointer.disableContextMenu();
 
 // Enable the right click context menu that was disabled by this script!
 pointer.enableContextMenu();
+
+// Get newest clickHistory entry
+pointer.getLastClick(); // => {t, x, y, endx, endy} t = timestamp x,y is the mousedown pos and endx,endy is the mouseup pos.
+
+// add event listener
+pointer.on( 'mousedown'/'mouseup'/'mousemove' , function (event) {
+	// event => {t: timestamp, x: x-pos, y: y-pos, evt: raw event}
+});
+
+// oncontextmenu of Pointer.element
+pointer.on( 'contextmenu', function (raw event) {
+
+});
+
+
+new Pointer() =>
+
+// variables
+
+BTN_LEFT: 0
+BTN_MIDDLE: 1
+BTN_RIGHT: 2
+buttonsDown: []
+clickHistory: []
+element: [default window]
+listeners: Map(0) {}
+mousedown: {t: null, x: null, y: null, evt: null}
+mouseup: {t: null, x: null, y: null, evt: null}
+moveHistory: [] // last 1000 mousemoves
+path: null // last mousemove's event.path
+preventContextMenu: ƒunction
+x: null
+y: null
+
+//functions
+
+disableContextMenu: ƒ disableContextMenu()
+enableContextMenu: ƒ enableContextMenu()
+getLastClick: ƒ getLastClick()
+isDown: ƒ isDown(button)
+on: ƒ on(event,fn)
+relative: ƒ relative()
+
+// used by Pointer
+// bindElementListeners: ƒ bindElementListeners()
+// fireEvent: ƒ fireEvent(event)
+
 ```
