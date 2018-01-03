@@ -227,3 +227,15 @@ relative: ƒ relative()
 // fireEvent: ƒ fireEvent(event)
 
 ```
+```javascript
+// can be used as a fast way to disable right-click context menu
+(new Pointer( element (default window) )).disableContextMenu();
+// Note that doing it this way you will not be able to enable it later!
+
+// "long" way
+const pointer = new Pointer( element (default window) );
+pointer.disableContextMenu();
+
+// But you are able to enable it:
+pointer.enableContextMenu();
+```
