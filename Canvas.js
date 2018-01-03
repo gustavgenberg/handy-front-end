@@ -699,4 +699,42 @@ class Canvas {
   }
 
 
+  /**
+   * class function that clears the saved object
+   */
+
+  removeSavedObject (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'HO';
+
+
+    /**
+     * get handyObject from storage
+     */
+
+    const handyObject = window.localStorage.getItem('canvas-' + key);
+
+
+    /**
+     * check if it exists and if it is an object
+     */
+
+    if(!handyObject || typeof handyObject !== 'object') return false;
+
+
+    /**
+     * remove
+     */
+
+    window.localStorage.removeItem('canvas-' + key);
+
+    
+  }
+
+
 }
