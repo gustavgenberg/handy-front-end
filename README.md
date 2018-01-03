@@ -73,7 +73,7 @@ Events:
 // Functions
 
 // Start rendering
-canvas.start(); // const canvas = new Canvas(...).start() also works but then the `start` event is fired right ahead and is impossible to catch afterhand
+canvas.start(); // const canvas = new Canvas(...).start(function( ... ){ `start` event });
 
 // Stop rendering
 canvas.stop();
