@@ -179,6 +179,13 @@ class Canvas {
 
 
     /**
+     * clear canvas if new draw function is set
+     */
+
+    if(event == 'draw') this.element.ctx.clear();
+    
+
+    /**
      * bind the event
      */
 
