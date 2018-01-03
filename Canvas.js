@@ -333,7 +333,7 @@ class Canvas {
    * class function that starts the rendering
    */
 
-  start () {
+  start (callback) {
 
 
     /**
@@ -355,6 +355,13 @@ class Canvas {
      */
 
     this.fireEvent('start', this.renderer, this._SCOPE_, performance.now());
+
+
+    /**
+     * Callback
+     */
+
+    if(callback) callback(this.renderer, this._SCOPE_, performance.now());
 
 
     /**
