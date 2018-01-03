@@ -85,8 +85,8 @@ class Canvas {
      * Pass the width and the height
      */
 
-    this.width = this.canvas.width = arguments[1] || 300;
-    this.height = this.canvas.height = arguments[2] || 150;
+    this.width = this.canvas.width = arguments[1] || this.canvas.width;
+    this.height = this.canvas.height = arguments[2] || this.canvas.height;
 
 
     /**
@@ -504,6 +504,109 @@ class Canvas {
      */
 
     return this.canvas.toDataURL('image/' + format);
+
+
+  }
+
+
+  /**
+   * class function that saves the current canvas image to localStorage
+   */
+
+  saveToStorage (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'Canvas';
+
+
+    /**
+     * save the base64 image
+     */
+
+    window.localStorage.setItem('canvas-' + key, this.toImage());
+
+
+  }
+
+
+  /**
+   * class function that writes canvas image from localStorage
+   */
+
+  restoreFromStorage (key) {
+
+
+    /**
+     * set default key
+     */
+
+    key = key || 'Canvas';
+
+
+    /**
+     * get base 64
+     */
+
+    const base64 = window.localStorage.getItem('canvas-' + key);
+
+
+    /**
+     * return if the key doesn't exist
+     */
+
+    return false;
+
+
+    /**
+     * create image
+     */
+
+    const image = new Image();
+
+
+    /**
+     * set image source
+     */
+
+    image.src = base64;
+
+
+    /**
+     * image onload
+     */
+
+    image.onload = function () {
+
+
+      /**
+       * draw single frame to canvas
+       */
+
+      this.drawFrame(function (ctx) {
+
+
+        /**
+         * draw image to canvas
+         */
+
+        ctx.drawImage(image, 0, 0);
+
+
+      });
+
+
+    }.bind(this);
+
+
+    /**
+     * return true if success
+     */
+
+    return true;
 
 
   }
