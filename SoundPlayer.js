@@ -274,7 +274,7 @@ SoundPlayer.Sound = class Sound {
    * class function that create buffer nodes and starts the source "stream"
    */
 
-  start (offset) {
+  start (offset, start) {
 
 
     /**
@@ -309,7 +309,7 @@ SoundPlayer.Sound = class Sound {
        * start the "stream"
        */
 
-      this.buffer.sourceNode.start(now, offset);
+      this.buffer.sourceNode.start(now + start, offset);
 
 
     }
@@ -359,7 +359,7 @@ SoundPlayer.Sound = class Sound {
 
   }
 
-  play (offset) {
+  play (start) {
 
 
     /**
@@ -391,10 +391,17 @@ SoundPlayer.Sound = class Sound {
 
 
       /**
+       * check if start is provided
+       */
+
+      start = start || 0;
+
+
+      /**
        * call the start function and start at offset
        */
 
-      this.start(this.offset);
+      this.start(this.offset, start);
 
 
     } else {
@@ -418,6 +425,75 @@ SoundPlayer.Sound = class Sound {
 
 
   }
+
+
+  /**
+   * class function that seeks to given point
+   */
+
+  seek (start) {
+
+
+    /**
+     * check if the buffer has been loaded
+     */
+
+    if(this.buffer) {
+
+
+      /**
+       * set the offset
+       */
+
+      this.offset = start;
+
+
+      /**
+       * check if playing
+       */
+
+      if(this.isPlaying) {
+
+
+        /**
+         * call the stop function
+         */
+
+        this.stop();
+
+
+        /**
+         * call the start function
+         */
+
+         this.start(this.offset, 0);
+
+
+      }
+
+
+    } else {
+
+
+      /**
+       * buffer has not been set - place the call in queue
+       */
+
+      this.queuedCalls.push(['play', arguments]);
+
+
+    }
+
+
+    /**
+     * return the instance
+     */
+
+    return this;
+
+
+  }
+
 
   pause () {
 
@@ -514,7 +590,7 @@ SoundPlayer.Sound = class Sound {
        * call the start function and set the new offset
        */
 
-      this.start(this.offset);
+      this.start(this.offset, 0);
 
 
     } else {
