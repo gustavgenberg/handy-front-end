@@ -317,7 +317,7 @@ player.get('Good Music'); => Sound object
 ```
 Sound object functions:
 ```javascript
-sound.play( wait x seconds ) - plays/resumes the audio
+sound.play( [wait x seconds, play for x seconds] ) - plays/resumes the audio
 sound.pause() - pauses the audio
 sound.rewind() - starts the audio over
 sound.seek( seconds ) - sets the sound starting position in seconds 
@@ -332,12 +332,12 @@ sound.seek(200).play();
 // OR
 player.get('Good Music').seek(200).play();
 
-// Example with play( seconds )
+// Example with play( seconds, seconds )
 const sound = player.load('Good Music', 'file.mp3') => Sound object
 
-sound.play(2);
+sound.play(2, 2); // wait 2 seconds and play for 2 seconds
 // OR
-player.get('Good Music').play(2);
+player.get('Good Music').play(2, 2);
 
 // Will wait 2 seconds before playing.
 ```
