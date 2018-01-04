@@ -244,10 +244,42 @@ SoundPlayer.Sound = class Sound {
 
 
       /**
-       * set isPlaying to false
+       * current bufferDuration
        */
 
-      this.isPlaying = false;
+      const bufferDuration = this.buffer.sourceNode.buffer.duration;
+
+
+      /**
+       * current sound offset
+       */
+
+      const currentTime = this.buffer.sourceNode.context.currentTime - this.startedAt;
+
+
+      /**
+       * the acceptable range
+       */
+
+      const range = 0.2;
+
+
+      /**
+       * check if current time is same as bufferDuration ( +- 0.2 )
+       */
+
+      if(currentTime > bufferDuration - range && currentTime < bufferDuration + range) {
+
+
+        /**
+         * set isPlaying to false
+         */
+
+        this.isPlaying = false;
+
+
+      }
+
 
 
     }.bind(this);
@@ -521,7 +553,7 @@ SoundPlayer.Sound = class Sound {
          * call the stop function
          */
 
-        this.stop();
+        this.stop(0);
 
 
         /**
@@ -599,7 +631,7 @@ SoundPlayer.Sound = class Sound {
        * call the stop function
        */
 
-      this.stop();
+      this.stop(0);
 
 
     } else {
