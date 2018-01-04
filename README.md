@@ -260,7 +260,7 @@ pointer.relative(); => {element: Pointer.element, x: xpos relative to element, y
 pointer.relative(element, x, y); => same ^
 
 // check if pointer is touching an element/object
-pointer.touches([x, y], {x, y: width, height}|HTMLElement);
+pointer.touches( [ x, y, ] {x, y: width, height}|HTMLElement);
 
 
 new Pointer() =>
