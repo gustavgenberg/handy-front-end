@@ -247,21 +247,22 @@ SoundPlayer.Sound = class Sound {
      * execute all queued calls to the sound object
      */
 
-    this.queuedCalls.forEach(function (command) {
+    this.queuedCalls.forEach(function (call) {
 
+      console.log(this.queuedCalls, call);
 
       /**
        * call the queued call
        */
 
-      this[command[0]].apply(this, command[1]);
+      this[call[0]].apply(this, call[1]);
 
 
       /**
        * remove call from queue
        */
 
-      this.queuedCalls.splice( this.queuedCalls.indexOf(command), 1 );
+      this.queuedCalls.splice( this.queuedCalls.indexOf(call), 1 );
 
 
     }.bind(this));
@@ -317,7 +318,7 @@ SoundPlayer.Sound = class Sound {
 
   }
 
-  stop () {
+  stop (stop) {
 
 
     /**
@@ -342,16 +343,9 @@ SoundPlayer.Sound = class Sound {
 
 
       /**
-       * disconnect source node from "stream"
-       */
-
-      this.buffer.sourceNode.disconnect();
-
-
-      /**
        * stop the "stream"
        */
-      this.buffer.sourceNode.stop(0);
+      this.buffer.sourceNode.stop(now + stop);
 
 
     }
@@ -359,7 +353,7 @@ SoundPlayer.Sound = class Sound {
 
   }
 
-  play (start) {
+  play (start, stop) {
 
 
     /**
@@ -373,7 +367,7 @@ SoundPlayer.Sound = class Sound {
        * return if already playing to avoid errors
        */
 
-      if(this.isPlaying) return;
+      if(this.isPlaying) return this;
 
 
       /**
@@ -402,6 +396,40 @@ SoundPlayer.Sound = class Sound {
        */
 
       this.start(this.offset, start);
+
+
+      /**
+       * check if stop
+       */
+
+      if(stop) {
+
+
+        /**
+         * schedule stop
+         */
+
+        this.stop(stop);
+
+
+        /**
+         * update isPlaying
+         */
+
+        window.setTimeout(function () {
+
+
+          /**
+           * update isPlaying
+           */
+
+          this.isPlaying = false;
+
+
+        }.bind(this));
+
+
+      }
 
 
     } else {
@@ -509,7 +537,7 @@ SoundPlayer.Sound = class Sound {
        * return if not playing to avoid errors
        */
 
-      if(!this.isPlaying) return;
+      if(!this.isPlaying) return this;
 
 
       /**
