@@ -11,6 +11,7 @@ Some handy scripts for a easier experience building the web:
 
 - [Canvas.js](#canvasjs)
 - [Pointer.js](#pointerjs)
+- [SoundPlayer.js](#soundplayerjs)
 
 ## Canvas.js
 Makes it much easier handling the awesome canvas
@@ -282,4 +283,42 @@ pointer.disableContextMenu();
 
 // But you are able to enable it:
 pointer.enableContextMenu();
+```
+
+## SoundPlayer.js
+Makes it very easy to play audio in the browser. This script uses the Web Audio API and not the DOM way of creating audio.
+
+Script link:
+
+[https://gustavgenberg.github.io/handy-front-end/SoundPlayer.js](https://gustavgenberg.github.io/handy-front-end/SoundPlayer.js)
+
+```javascript
+// Initialize
+const player = new SoundPlayer();
+
+// Load AND play a sound
+player.load( 'sound.mp3' ).play();
+
+// Play loaded sound (it has to be loaded first)
+player.get( 'sound.mp3' ).play();
+
+```
+SoundPlayer functions:
+```javascript
+player.load( [ name ], url ) => Sound object
+player.get( [ name ] | url ) => Sound object
+
+// Example
+player.load('file.mp3'); => Sound object
+player.get('file.mp3'); => Sound object
+
+player.load('Good Music', 'file.mp3') => Sound object
+player.get('Good Music'); => Sound object
+```
+Sound object functions:
+```javascript
+sound.play() - plays/resumes the audio
+sound.pause() - pauses the audio
+sound.rewind() - starts the audio over
+sound.setVolume( decimal zero to one ) - sets audio volume
 ```
