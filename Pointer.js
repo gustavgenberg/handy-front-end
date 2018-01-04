@@ -577,6 +577,44 @@ class Pointer {
 
 
   /**
+   * class function that returns all last 1000 mouse moves or specific one
+   */
+
+  getMoveHistory () {
+
+
+    /**
+     * check if any argument is provided
+     */
+
+    if(arguments[0]) {
+
+
+      /**
+       * check if argument is more than 0 & return
+       */
+
+      if(arguments[0] > 0)
+        return this.moveHistory[arguments[0] - 1];
+
+      else if(arguments[0] < 0)
+        return this.moveHistory[this.moveHistory.length - Math.abs(arguments[0])];
+
+
+    }
+
+
+    /**
+     * return whole moveHistory
+     */
+
+    return this.moveHistory;
+
+
+  }
+
+
+  /**
    * class function that returns relative coordinates to an element
    */
 
@@ -689,6 +727,7 @@ class Pointer {
     /**
      * check if there are 3 arguments
      */
+
     if(arguments.length == 3) {
 
 
