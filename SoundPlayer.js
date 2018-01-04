@@ -479,7 +479,7 @@ SoundPlayer.Sound = class Sound {
        * buffer has not been set - place the call in queue
        */
 
-      this.queuedCalls.push(['play', arguments]);
+      this.queuedCalls.push(['seek', arguments]);
 
 
     }
