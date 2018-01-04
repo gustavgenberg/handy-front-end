@@ -101,6 +101,27 @@ canvas.resume();
 // Get base64 image of canvas
 canvas.toImage( [ format ] ); // format default is png
 
+// Save base64 image to localstorage
+canvas.saveToStorage( key );
+
+// Draw from storage
+canvas.restoreFromStorage( key );
+
+// Remove from storage
+canvas.removeFromStorage( key );
+
+// Save HandyObject to storage
+canvas.saveObject( key );
+
+// Load HandyObject from storage
+canvas.loadObject( key );
+
+// Remove saved object from storage
+canvas.removeSavedObject( key );
+
+// Limit the framerate
+canvas.setFramerateLimit( fps ); // Infinity default. 0.5 = 1 frame every two secs
+
 ```
 ```javascript
 //functions added to window.CanvasRenderingContext2D:
