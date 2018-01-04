@@ -230,6 +230,33 @@ SoundPlayer.Sound = class Sound {
 
 
   /**
+   * class function that binds necessary events to sourceNode
+   */
+
+  bindSourceNodeEvents () {
+
+
+    /**
+     * onended event
+     */
+
+    this.buffer.sourceNode.onended = function () {
+
+
+      /**
+       * set isPlaying to false
+       */
+
+      this.isPlaying = false;
+
+
+    }.bind(this);
+
+
+  }
+
+
+  /**
    * class function that sets the soundbuffer
    */
 
@@ -304,6 +331,13 @@ SoundPlayer.Sound = class Sound {
        */
 
       this.buffer.createNodes();
+
+
+      /**
+       * bind sourceNode events
+       */
+
+      this.bindSourceNodeEvents();
 
 
       /**
