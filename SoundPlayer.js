@@ -409,7 +409,7 @@ SoundPlayer.Sound = class Sound {
          * schedule stop
          */
 
-        this.stop(stop);
+        this.stop(start + stop);
 
 
         /**
