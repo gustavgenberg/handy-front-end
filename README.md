@@ -314,11 +314,29 @@ player.get('file.mp3'); => Sound object
 
 player.load('Good Music', 'file.mp3') => Sound object
 player.get('Good Music'); => Sound object
+
+// Example with seek
+const sound = player.load('Good Music', 'file.mp3') => Sound object
+
+sound.seek(200).play();
+// OR
+player.get('Good Music').seek(200).play();
+
+// Example with play( seconds )
+const sound = player.load('Good Music', 'file.mp3') => Sound object
+
+sound.play(2);
+// OR
+player.get('Good Music').play(2);
+
+// Will wait 2 seconds before playing.
+
 ```
 Sound object functions:
 ```javascript
-sound.play() - plays/resumes the audio
+sound.play( wait x seconds ) - plays/resumes the audio
 sound.pause() - pauses the audio
 sound.rewind() - starts the audio over
+sound.seek( seconds ) - sets the sound starting position in seconds 
 sound.setVolume( decimal zero to one ) - sets audio volume
 ```
