@@ -44,10 +44,10 @@ class SoundPlayer {
 
 
   /**
-   * class function that plays a loaded sound
+   * class function that returns a loaded sound
    */
 
-  play () {
+  get () {
 
 
     /**
@@ -62,13 +62,6 @@ class SoundPlayer {
        */
 
       const sound = this.sounds.get(arguments[0]);
-
-
-      /**
-       * play the sound
-       */
-
-      sound.play();
 
 
       /**
