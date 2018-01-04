@@ -140,6 +140,13 @@ class Canvas {
 
 
     /**
+     * Framerate limit
+     */
+
+    this.framerateLimit = Infinity;
+
+
+    /**
      * Make the reset and clear CanvasRenderingContext2D functions easy to use for single frame drawing
      */
 
@@ -183,7 +190,7 @@ class Canvas {
      */
 
     if(event == 'draw') this.element.ctx.clear();
-    
+
 
     /**
      * bind the event
@@ -292,11 +299,31 @@ class Canvas {
 
 
     /**
+     * Request the next frame
+     */
+
+    this._rafid = window.requestAnimationFrame(this._loop.bind(this), this.element);
+
+
+    /**
      * calculate the delta betweek previous loop
      */
 
     const now = performance.now();
     const delta = (now - this._lastFrame) / 1000.0;
+
+
+    /**
+     * check if this frame can be skipped
+     */
+
+    if(1.0 / delta > this.framerateLimit) return;
+
+
+    /**
+     * update last rendered frame timestamp
+     */
+
     this._lastFrame = now;
 
 
@@ -312,13 +339,6 @@ class Canvas {
      */
 
     this.fireEvent('draw', this.renderer, this._HANDYOBJECT_, delta, performance.now());
-
-
-    /**
-     * Request the next frame
-     */
-
-    this._rafid = window.requestAnimationFrame(this._loop.bind(this), this.element);
 
 
   }
@@ -488,6 +508,23 @@ class Canvas {
      */
 
     return this;
+
+
+  }
+
+
+  /**
+   * class function that sets a framerate limit
+   */
+
+  setFramerateLimit (limit) {
+
+
+    /**
+     * set the limit
+     */
+
+    this.framerateLimit = limit;
 
 
   }
