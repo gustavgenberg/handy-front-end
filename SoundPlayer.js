@@ -677,7 +677,7 @@ SoundPlayer.Sound = class Sound {
        * call the stop function
        */
 
-      this.stop();
+      this.stop(0);
 
 
       /**
