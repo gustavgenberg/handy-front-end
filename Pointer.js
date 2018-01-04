@@ -665,7 +665,91 @@ class Pointer {
      */
 
     return this;
-    
+
+
+  }
+
+
+  /**
+   * class function that does simple point collision detection
+   */
+
+  touches () {
+
+
+    /**
+     * store arguments
+     */
+
+    let object = arguments[0],
+        x = null,
+        y = null;
+
+
+    /**
+     * check if there are 3 arguments
+     */
+    if(arguments.length == 3) {
+
+
+      /**
+       * reassign variables
+       */
+
+      x = arguments[0];
+      y = arguments[1];
+      object = arguments[2];
+
+
+    }
+
+
+    /**
+     * check type of provided argument
+     */
+
+    if(object instanceof HTMLElement) {
+
+
+      /**
+       * get boundings of element
+       */
+
+      const boundings = object.getBoundingClientRect();
+
+
+      /**
+       * return collision or not
+       */
+
+      return (
+        (x || this.x) >= boundings.left && (x || this.x) <= (boundings.left + object.clientWidth) &&
+        (y || this.y) >= boundings.top && (y || this.y) <= (boundings.top + object.clientHeight)
+      )
+
+
+    }
+
+
+    /**
+     * object should be of type object & return collision or not
+     */
+
+    return (
+      (
+        object &&
+        typeof object == 'object' &&
+        object.x &&
+        object.y &&
+        object.width &&
+        object.height
+      ) &&
+      (
+        (x || this.x) >= object.x && (x || this.x) <= (object.x + object.width) &&
+        (y || this.y) >= object.y && (y || this.y) <= (object.y + object.height)
+      )
+    )
+
 
   }
 
