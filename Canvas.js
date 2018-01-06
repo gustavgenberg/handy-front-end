@@ -13,7 +13,7 @@
 
 
 /**
- * Simple performance.now polyfill
+ * Simple Canvas.now polyfill
  */
 
 !function(n){n.performance||(n.performance={now:function(){return+new Date}})}(this);
@@ -147,6 +147,21 @@ class Canvas {
 
 
     /**
+     * framerate balancing min/max
+     */
+
+    this._balanceFramerateMin = 5;
+    this._balanceFramerateMax = Infinity;
+
+
+    /**
+     * canvasElements list
+     */
+
+    this.canvasElements = [];
+
+
+    /**
      * Make the reset and clear CanvasRenderingContext2D functions easy to use for single frame drawing
      */
 
@@ -155,17 +170,17 @@ class Canvas {
 
 
     /**
-     * Make the example scene the default one
+     * Draw the 'Its Working!' frame
      */
 
-    this.defaultEventListeners();
+    this.drawWorkingFrame();
 
 
     /**
      * Fire the custom `init` event
      */
 
-    this.fireEvent('init', this.renderer, this._HANDYOBJECT_, performance.now());
+    this.fireEvent('init', this.renderer, this._HANDYOBJECT_, Canvas.now());
 
 
     /**
@@ -189,7 +204,17 @@ class Canvas {
      * clear canvas if new draw function is set
      */
 
-    if(event == 'draw') this.element.ctx.clear();
+    if(event == 'draw') {
+
+
+      /**
+       * clear canvas
+       */
+
+      this.element.ctx.clear();
+
+
+    }
 
 
     /**
@@ -238,14 +263,14 @@ class Canvas {
    * class function that binds the default scene
    */
 
-  defaultEventListeners () {
+  drawWorkingFrame () {
 
 
     /**
      * binds the `draw` event
      */
 
-    this.on('draw', function (renderer, vars, delta) {
+    this.drawFrame(function (renderer) {
 
 
       /**
@@ -309,7 +334,7 @@ class Canvas {
      * calculate the delta betweek previous loop
      */
 
-    const now = performance.now();
+    const now = Canvas.now();
     const delta = (now - this._lastFrame) / 1000.0;
 
 
@@ -318,6 +343,11 @@ class Canvas {
      */
 
     if(1.0 / delta > this.framerateLimit) return;
+
+
+    /**
+     * PLANNED FUNCTION balanceFramerate
+     */
 
 
     /**
@@ -331,14 +361,20 @@ class Canvas {
      * If the update loop is not paused, fire the `update` event
      */
 
-    if(!this._paused) this.fireEvent('update', this._HANDYOBJECT_, delta, performance.now());
+    if(!this._paused) this.fireEvent('update', this._HANDYOBJECT_, delta, Canvas.now());
 
+
+    /**
+     * render all elements in canvasElements
+     */
+
+    this.renderCanvasElements();
 
     /**
      * Fire the `draw` event
      */
 
-    this.fireEvent('draw', this.renderer, this._HANDYOBJECT_, delta, performance.now());
+    this.fireEvent('draw', this.renderer, this._HANDYOBJECT_, delta, Canvas.now());
 
 
   }
@@ -365,7 +401,7 @@ class Canvas {
    * class function that starts the rendering
    */
 
-  start (callback) {
+  start (fn) {
 
 
     /**
@@ -379,21 +415,21 @@ class Canvas {
      * guess the previous frame timestamp at start which maximizes delta accuricy
      */
 
-    this._lastFrame = performance.now() - 16;
+    this._lastFrame = Canvas.now() - 16;
 
 
     /**
      * Fire the `start` event
      */
 
-    this.fireEvent('start', this.renderer, this._HANDYOBJECT_, performance.now());
+    this.fireEvent('start', this.renderer, this._HANDYOBJECT_, Canvas.now());
 
 
     /**
      * Callback
      */
 
-    if(callback) callback.bind(this)(this.renderer, this._HANDYOBJECT_, performance.now());
+    if(fn) fn.apply(this, [this.renderer, this._HANDYOBJECT_, Canvas.now()]);
 
 
     /**
@@ -417,7 +453,7 @@ class Canvas {
    * game function that stops the rendering aswell as the updateloop
    */
 
-  stop () {
+  stop (fn) {
 
 
     /**
@@ -431,7 +467,14 @@ class Canvas {
      * fire the `stop` event
      */
 
-    this.fireEvent('stop', this.renderer, this._HANDYOBJECT_, performance.now());
+    this.fireEvent('stop', this.renderer, this._HANDYOBJECT_, Canvas.now());
+
+
+    /**
+     * Callback
+     */
+
+    if(fn) fn.apply(this, [this.renderer, this._HANDYOBJECT_, Canvas.now()]);
 
 
     /**
@@ -455,7 +498,7 @@ class Canvas {
    * class function that pauses the update loop
    */
 
-  pause () {
+  pause (fn) {
 
 
     /**
@@ -469,7 +512,14 @@ class Canvas {
      * fire the `pause` event
      */
 
-    this.fireEvent('pause', this.renderer, this._HANDYOBJECT_, performance.now());
+    this.fireEvent('pause', this.renderer, this._HANDYOBJECT_, Canvas.now());
+
+
+    /**
+     * Callback
+     */
+
+    if(fn) fn.apply(this, [this.renderer, this._HANDYOBJECT_, Canvas.now()]);
 
 
     /**
@@ -486,7 +536,7 @@ class Canvas {
    * class function that resumes the update loop
    */
 
-  resume () {
+  resume (fn) {
 
 
     /**
@@ -500,7 +550,14 @@ class Canvas {
      * fire the `resume` event
      */
 
-    this.fireEvent('resume', this.renderer, this._HANDYOBJECT_, performance.now());
+    this.fireEvent('resume', this.renderer, this._HANDYOBJECT_, Canvas.now());
+
+
+    /**
+     * Callback
+     */
+
+    if(fn) fn.apply(this, [this.renderer, this._HANDYOBJECT_, Canvas.now()]);
 
 
     /**
@@ -526,6 +583,36 @@ class Canvas {
 
     this.framerateLimit = limit;
 
+
+  }
+
+
+  /**
+   * class function that reduces the frame count when frames are identical
+   */
+
+  balanceFramerate (bool, min, max) {
+
+
+    /**
+     * set balanceFramerate true/false
+     */
+
+    this.balanceFramerate = bool;
+
+
+    /**
+     * set balanceFramerate min
+     */
+
+    if(min) this._balanceFramerateMin = min;
+
+
+    /**
+     * set balanceFramerate max
+     */
+
+    if(max) this._balanceFramerateMax = max;
 
   }
 
@@ -833,4 +920,314 @@ class Canvas {
   }
 
 
-}
+  /**
+   * class function that adds a canvas image object to renderlist
+   */
+
+  addElement (canvasElement) {
+
+
+    /**
+     * add canvaselement to list
+     */
+
+    this.canvasElements.push(canvasElement);
+
+
+  }
+
+
+  /**
+   * class function that removes a canvasElement from the renderlist
+   */
+
+  removeElement (canvasElement) {
+
+
+    /**
+     * remove the canvasElement
+     */
+
+    this.canvasElements.splice(this.canvasElements.indexOf(canvasElement), 1);
+
+
+  }
+
+
+  /**
+   * class function that returns all canvasElements
+   */
+
+  getElements () {
+
+
+    /**
+     * return all canvasElements
+     */
+
+    return this.canvasElements;
+
+
+  }
+
+
+  /**
+   * class function that renders all canvas elements
+   */
+
+  renderCanvasElements () {
+
+    const renderer = this.renderer;
+    renderer.clear();
+    if(this.canvasElements.length) renderer.clear();
+
+    for( let element of this.canvasElements ) {
+
+      if(element.animation) {
+
+        const ratio = (Canvas.now() - element.animation.start) / (element.animation.end - element.animation.start);
+
+        if(ratio >= 1) {
+          element.animation = false;
+        } else {
+
+          switch(element.animation.type) {
+            case 'move':
+                element.x = Canvas.lerp(element.animation.from.x, element.animation.to.x, ratio);
+                element.y = Canvas.lerp(element.animation.from.y, element.animation.to.y, ratio);
+              break;
+
+            case 'lineLength':
+              element.lineLength = Canvas.lerp(element.animation.from.lineLength, element.animation.to.lineLength, ratio);
+
+          }
+
+        }
+
+      }
+
+      switch (element.constructor.name) {
+
+        case 'CanvasImage':
+          if(!element.element) continue;
+          if(element.sourceX)
+            renderer.drawImage(element.element, element.sourceX, element.sourceY, element.sourceWidth, element.sourceHeight, element.x, element.y, element.width, element.height);
+          else
+            renderer.drawImage(element.element, element.x, element.y, element.width, element.height);
+          break;
+
+        case 'CanvasLine':
+          renderer.save();
+          renderer.beginPath();
+          renderer.moveTo(element.from.x, element.from.y);
+          renderer.lineTo(Canvas.lerp(element.from.x, element.to.x, element.lineLength), Canvas.lerp(element.from.y, element.to.y, element.lineLength));
+          renderer.lineWidth = element.lineWidth;
+          renderer.lineCap = element.lineCap;
+          renderer.stroke();
+          renderer.restore();
+
+      };
+
+    }
+
+
+  }
+
+
+};
+
+
+/**
+ * Linear interpolation - used for animations
+ */
+
+Canvas.lerp = function (v1, v2, t) {
+  return (1 - t) * v1 + t * v2;
+};
+
+
+/**
+ * returns Canvas.now() or +new Date
+ */
+
+Canvas.now = function () {
+
+
+  /**
+   * check if performance exists
+   */
+
+  if('performance' in window && 'now' in window.performance) {
+
+
+    /**
+     * return Canvas.now
+     */
+
+    return performance.now();
+
+
+  }
+
+
+  /**
+   * if performance does not exist, use +new Date
+   */
+
+  return +new Date;
+
+
+};
+
+
+/**
+ * CANVAS ELEMENTS
+ * EXPERIMENTAL
+ */
+
+Canvas.Element = class Element {
+
+  constructor () {
+
+    const args = arguments[0] || {};
+
+    this.x = typeof args.x !== 'undefined' ? args.x : null;
+    this.y = typeof args.y !== 'undefined' ? args.y : null;
+
+    this.width = typeof args.width !== 'undefined' ? args.width : null;
+    this.height = typeof args.height !== 'undefined' ? args.height : null;
+
+    this.rotation = typeof args.rotation !== 'undefined' ? args.rotation : null;
+
+    this.animation = false;
+
+  }
+
+  animate () {
+
+    const type = arguments[0];
+    const args = arguments[1];
+
+    switch(type) {
+
+      case 'move':
+
+        this.animation = {
+          type: type,
+          from: {
+            x: this.x,
+            y: this.y
+          },
+          to: {
+            x: args.x,
+            y: args.y
+          }
+        };
+
+        break;
+
+      case 'lineLength':
+
+        this.animation = {
+          type: type,
+          from: {
+            lineLength: this.lineLength
+          },
+          to: {
+            lineLength: args.lineLength
+          }
+        };
+
+        break;
+
+      default:
+        return false;
+
+    };
+
+    this.animation.start = Canvas.now();
+    this.animation.end = this.animation.start + args.duration;
+
+  }
+
+};
+
+
+/**
+ * canvas image
+ */
+
+Canvas.Image = class CanvasImage extends Canvas.Element {
+
+  constructor () {
+
+    const args = arguments[0] || {};
+
+    super(args);
+
+    this.element = (function () {
+
+      if(args.image)
+        return args.image;
+      else {
+        const image = new Image();
+        image.src = args.url;
+        return image;
+      }
+
+    })();
+
+    this.sourceX = args.sourceX || null;
+    this.sourceY = args.sourceY || null;
+    this.sourceWidth = args.sourceWidth || null;
+    this.sourceHeight = args.sourceHeight || null;
+
+    this.element.onload = function () {
+
+      if(this.width) {
+        this.element.width = this.width;
+      } else
+        this.width = this.element.width;
+
+      if(this.height) {
+        this.element.height = this.height;
+      } else
+        this.height = this.element.height;
+
+      this.sourceX = args.sourceX || 0;
+      this.sourceY = args.sourceY || 0;
+      this.sourceWidth = args.sourceWidth || this.width;
+      this.sourceHeight = args.sourceHeight || this.height;
+
+      if(typeof arguments[1] == 'function') arguments[1]();
+
+    }.bind(this);
+
+  }
+
+};
+
+
+/**
+ * canvas line
+ */
+
+Canvas.Line = class CanvasLine extends Canvas.Element {
+
+  constructor () {
+
+    const args = arguments[0] || {};
+
+    super(args);
+
+    this.from = { x: args.from.x, y: args.from.y };
+    this.to = { x: args.to.x, y: args.to.y };
+
+    this.lineWidth = args.lineWidth || 2;
+    this.lineCap = args.lineCap || 'butt';
+
+    this.lineLength = args.lineLength || 0.5;
+
+  }
+
+};
