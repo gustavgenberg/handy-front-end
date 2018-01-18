@@ -12,7 +12,7 @@ Some handy scripts for a easier experience building the web:
 - [Canvas.js](#canvasjs)
 - [Pointer.js](#pointerjs)
 - [SoundPlayer.js](#soundplayerjs)
-- [ElementResizeEvent.js](#elementresizeevent.js)
+- [ElementResizeEvent.js](#elementresizeeventjs)
 
 ## Canvas.js
 Makes it much easier handling the awesome canvas
