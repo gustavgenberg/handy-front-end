@@ -119,6 +119,20 @@
            */
           
           this.fireEvent('resize', width, height);
+          
+          
+          /**
+           * set new width
+           */
+          
+          this.width = width;
+         
+          
+          /**
+           * set new height
+           */
+         
+          this.height = height;
 
 
         }.bind(this));
