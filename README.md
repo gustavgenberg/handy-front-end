@@ -12,6 +12,7 @@ Some handy scripts for a easier experience building the web:
 - [Canvas.js](#canvasjs)
 - [Pointer.js](#pointerjs)
 - [SoundPlayer.js](#soundplayerjs)
+- [ElementResizeEvent.js](#elementresizeevent.js)
 
 ## Canvas.js
 Makes it much easier handling the awesome canvas
@@ -365,3 +366,22 @@ player.get('Good Music').play(2, 2);
 
 // Will wait 2 seconds before playing.
 ```
+
+## ElementResizeEvent.js
+Adds the lacking element 'resize' event functionality. Event-based, so there is not any cpu waste at all!
+
+Script link:
+
+[https://gustavgenberg.github.io/handy-front-end/ElementResizeEvent.js](https://gustavgenberg.github.io/handy-front-end/ElementResizeEvent.js)
+
+```javascript
+// Get the element
+const element = document.querySelector('div');
+
+// Listen for resize events
+element.addEventListener('resize', function ( width, height ) {
+	// width & height are the new dimensions efter the resize
+	console.log(width, height);
+});
+```
+It is very simple! It just adds the onresize functionality to every element, not just window & document. `resize` event is triggered when a new width or height is set, through window resize (if percentage is used) & javascript. The `resize` event is NOT triggered when the style dimensions is changed!
