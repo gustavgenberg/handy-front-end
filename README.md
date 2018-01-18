@@ -384,4 +384,4 @@ element.addEventListener('resize', function ( width, height ) {
 	console.log(width, height);
 });
 ```
-It is very simple! It just adds the onresize functionality to every element, not just window & document. `resize` event is triggered when a new width or height is set, through window resize (if percentage is used) & javascript. The `resize` event is NOT triggered when the style dimensions is changed!
+It is very simple! It just adds the onresize functionality to every element, not just window & document. `resize` event is triggered when a new width or height is set, through window resize (if percentage is used) & javascript. The `resize` event is NOT triggered when the style dimensions is changed due to no (known) clean solution!
