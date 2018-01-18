@@ -6,6 +6,13 @@
 
 
 (function (window) {
+  
+  
+  /**
+   * Set window.ElementResizeEventListener to true to easy know if this script is loaded
+   */
+  
+  window.ElementResizeEventListener = true;
 
 
   /**
