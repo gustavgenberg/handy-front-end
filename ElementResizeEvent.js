@@ -15,6 +15,10 @@
   const ADDEVENTLLISTENER = HTMLElement.prototype.addEventListener;
 
 
+  /**
+   * Array of all listeners
+   */
+   
   let Listeners = [];
 
 
@@ -187,6 +191,19 @@
 
       this.fn(this.element.clientWidth, this.element.clientHeight);
 
+
+    }
+
+
+    /**
+     * class functions that removes the listener
+     */
+
+    remove () {
+
+      this.mutationObserver.disconnect();
+
+      Listeners.splice(Listeners.indexOf(this), 1);
 
     }
 
