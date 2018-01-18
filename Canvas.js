@@ -33,7 +33,7 @@
    * class Canvas
    */
 
-  class Canvas {
+  window.Canvas = class Canvas {
 
 
     /**
