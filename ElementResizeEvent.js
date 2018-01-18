@@ -13,12 +13,13 @@
    */
 
   const ADDEVENTLLISTENER = HTMLElement.prototype.addEventListener;
+  const REMOVEEVENTLLISTENER = HTMLElement.prototype.removeEventListener;
 
 
   /**
    * Array of all listeners
    */
-   
+
   let Listeners = [];
 
 
@@ -201,9 +202,20 @@
 
     remove () {
 
+
+      /**
+       * disconnect the mutationObserver
+       */
+
       this.mutationObserver.disconnect();
 
+
+      /**
+       * remove this object from listeners array
+       */
+
       Listeners.splice(Listeners.indexOf(this), 1);
+
 
     }
 
@@ -226,7 +238,7 @@
 
 
       /**
-       * return the ElementResizeEventListener object
+       * push new object to listeners
        */
 
       Listeners.push( new ElementResizeEventListener(this, fn) );
@@ -236,10 +248,81 @@
 
 
       /**
-       * return the default addEventListener
+       * call the default addEventListener
        */
 
       ADDEVENTLLISTENER.apply(this, [event, fn]);
+
+
+    }
+
+
+  }
+
+
+  /**
+   * replace the removeEventListener function with the custom one
+   */
+
+  HTMLElement.prototype.removeEventListener = function (event, fn) {
+
+
+    /**
+     * Check if the event type is 'resize'
+     */
+
+    if(event == 'resize') {
+
+
+      /**
+       * Loop through all listeners
+       */
+
+      for(let i = 0; i < Listeners.length; i++) {
+
+
+        /**
+         * Get the current listener
+         */
+
+        const listener = Listeners[i];
+
+
+        /**
+         * check if listener function is the same as the provided one
+         */
+
+        if(listener.fn === fn) {
+
+
+          /**
+           * remove the listener
+           */
+
+          listener.remove();
+
+
+          /**
+           * break the loop
+           */
+
+          break;
+
+
+        }
+
+
+      }
+
+
+    } else {
+
+
+      /**
+       * call the default removeEventListener
+       */
+
+      REMOVEEVENTLLISTENER.apply(this, [event, fn]);
 
 
     }
