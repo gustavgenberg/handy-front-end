@@ -99,7 +99,34 @@
       if(arguments[1] == window.innerWidth && arguments[2] == window.innerHeight)
         window.addEventListener('resize', function () { this.width = this.element.width = window.innerWidth; this.height = this.element.height = window.innerHeight; }.bind(this));
 
+      
+      /**
+       * check if ElementResizeEvent.js is loaded
+       */
+      
+      if('ElementResizeEventListener' in window) {
+      
+        
+        /**
+         * add custom resize event to the canvas element
+         */
+        
+        this.element.addEventListener('resize', function (width, height) {
+          
+          
+          /**
+           * Fire the custom resize event
+           */
+          
+          this.fireEvent('resize', width, height);
 
+
+        }.bind(this));
+
+
+      }
+      
+      
       /**
        * Map which stores all the eventlisteners created with canvas.on();
        */
