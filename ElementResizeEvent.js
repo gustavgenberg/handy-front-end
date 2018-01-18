@@ -15,6 +15,74 @@
   const ADDEVENTLLISTENER = HTMLElement.prototype.addEventListener;
 
 
+  let Listeners = [];
+
+
+  /**
+   * add an event listener to window
+   */
+
+  window.addEventListener('resize', function () {
+
+
+    /**
+     * Loop trough all listeners
+     */
+
+    Listeners.forEach(function (listener) {
+
+
+      /**
+       * Get width
+       */
+
+      const width = listener.element.clientWidth;
+
+
+      /**
+       * Get height
+       */
+
+      const height = listener.element.clientHeight;
+
+
+      /**
+       * Check for changes
+       */
+
+      if(width !== listener._width || height !== listener._height) {
+
+
+        /**
+         * trigger event
+         */
+
+        listener.triggerEvent();
+
+
+        /**
+         * set new width
+         */
+
+        listener._width = width;
+
+
+        /**
+         * set new height
+         */
+
+        listener._height = height;
+
+
+      }
+
+
+    });
+
+
+  });
+
+
   /**
    * class ElementResizeEventListener
    */
@@ -89,7 +157,7 @@
            */
 
           this._height = this.element.clientHeight;
-          
+
 
         }
 
@@ -144,7 +212,7 @@
        * return the ElementResizeEventListener object
        */
 
-      return new ElementResizeEventListener(this, fn);
+      Listeners.push( new ElementResizeEventListener(this, fn) );
 
 
     } else {
@@ -154,7 +222,7 @@
        * return the default addEventListener
        */
 
-      return ADDEVENTLLISTENER.apply(this, [event, fn]);
+      ADDEVENTLLISTENER.apply(this, [event, fn]);
 
 
     }
