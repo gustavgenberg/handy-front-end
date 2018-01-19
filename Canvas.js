@@ -447,6 +447,13 @@
 
     start (fn) {
 
+      
+      /**
+       * check if we are already running
+       */
+       
+      if(this._running) return;
+      
 
       /**
        * are we drawing? yes we are
@@ -501,6 +508,13 @@
 
 
       /**
+       * check if we are already not running
+       */
+       
+      if(!this._running) return;
+      
+      
+      /**
        * we are not drawing
        */
 
@@ -543,6 +557,13 @@
      */
 
     pause (fn) {
+      
+      
+      /**
+       * check if we are already paused
+       */
+       
+      if(this._paused) return;
 
 
       /**
@@ -582,6 +603,13 @@
 
     resume (fn) {
 
+      
+      /**
+       * check if we are already not paused
+       */
+       
+      if(!this._paused) return;
+      
 
       /**
        * the update loop is not paused
