@@ -1156,6 +1156,51 @@
    * CANVAS ELEMENTS
    * EXPERIMENTAL
    */
+  
+  
+  Canvas.Vector = class Vector {
+    constructor () {
+    
+      this.pos = {};
+      
+      this.pos.x = arguments[0];
+      this.pos.y = arguments[1];
+      this.pos.z = arguments[2];
+      
+      this.rotation = {};
+      
+      this.rotation.x = arguments[3];
+      this.rotation.y = arguments[4];
+      this.rotation.z = arguments[5];
+      
+      
+    }
+    
+    mult (vector) {
+      
+      this.pos.x *= vector.pos.x;
+      this.pos.y *= vector.pos.y;
+      this.pos.z *= vector.pos.z;
+      
+      this.pos.x *= vector.rotation.x;
+      this.pos.y *= vector.rotation.y;
+      this.pos.z *= vector.rotation.z;
+      
+    }
+    
+    add (vector) {
+      
+      this.pos.x += vector.pos.x;
+      this.pos.y += vector.pos.y;
+      this.pos.z += vector.pos.z;
+      
+      this.pos.x += vector.rotation.x;
+      this.pos.y += vector.rotation.y;
+      this.pos.z += vector.rotation.z;
+      
+    }
+      
+  }
 
   Canvas.Element = class Element {
 
