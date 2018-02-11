@@ -7,7 +7,7 @@
       this.address = typeof arguments[0] == 'string' ? arguments[0] : null;
 
       this.open = false;
-      this.closed = typeof arguments[0] == 'string' ? true : false;
+      this.closed = false;
       this.error = false;
 
       this.secure = this.address ? this.address.substring(0, 6) == 'wss://' : null;
@@ -84,6 +84,8 @@
         }
 
       }.bind(this);
+      
+      if(this.socket.readyState == 1) this.socket.onopen();
 
     }
 
@@ -117,7 +119,7 @@
 
     send () {
 
-      if(this.closed) return;
+      if(!this.open) return;
 
       if(this.binary || !arguments[1]) {
         this.socket.send(arguments[0]);
