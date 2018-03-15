@@ -261,6 +261,13 @@
           
           
           /**
+           * Play the sound
+           */
+          
+          this.play();
+          
+          
+          /**
            * Rewind the sound
            */
           
