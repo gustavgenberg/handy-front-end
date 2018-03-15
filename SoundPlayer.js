@@ -213,6 +213,13 @@
        */
 
       this.isPlaying = false;
+      
+      
+      /**
+       * do we want to repeat the sound?
+       */
+      
+      this.repeat = false;
 
 
       /**
@@ -244,6 +251,30 @@
        */
 
       this.buffer.sourceNode.onended = function () {
+        
+        
+        /**
+         * Check if we want to repeat
+         */
+        
+        if(this.repeat) {
+          
+          
+          /**
+           * Rewind the sound
+           */
+          
+          this.rewind();
+          
+          
+          /**
+           * return
+           */
+          
+          return;
+         
+          
+        }
 
 
         /**
