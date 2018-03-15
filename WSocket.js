@@ -91,22 +91,27 @@
 
     onopen (fn) {
       this._onopen = fn;
+      return this;
     }
 
     onclose (fn) {
       this._onclose = fn;
+      return this;
     }
 
     onerror (fn) {
       this._onerror = fn;
+      return this;
     }
 
     onmessage (fn) {
       this._onmessage = fn;
+      return this;
     }
 
     onbinary (fn) {
       this._onbinary = fn;
+      return this;
     }
 
     disconnect () {
