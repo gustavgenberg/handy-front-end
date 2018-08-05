@@ -412,7 +412,7 @@
        * render all elements in canvasElements
        */
 
-      this.renderCanvasElements();
+      //this.renderCanvasElements();
 
       /**
        * Fire the `draw` event
