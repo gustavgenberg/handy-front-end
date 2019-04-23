@@ -215,6 +215,8 @@ class Canvas {
      }
     
      resize(width, height) {
+          const self = this;
+         
           self.width = self.element.width = width;
           self.height = self.element.height = height;
 
