@@ -1,4 +1,4 @@
-const time = hrtimeMS;
+const time = new Date().getTime;
 
 CanvasRenderingContext2D && (CanvasRenderingContext2D.prototype.reset = function () {
      this.setTransform(1, 0, 0, 1, 0, 0)
