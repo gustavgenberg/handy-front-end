@@ -185,13 +185,7 @@ class Canvas {
 
           if(self.width === window.innerWidth && self.height === window.innerHeight) {
                window.addEventListener('resize', function () {
-                    self.width = self.element.width = window.innerWidth;
-                    self.height = self.element.height = window.innerHeight;
-
-                    if(self.osc) {
-                         self.osc.width = window.innerWidth;
-                         self.osc.height = window.innerHeight;
-                    }
+                    self.resize(window.innerWidth, window.innerHeight);
                });
           }
 
@@ -218,6 +212,16 @@ class Canvas {
 
           self.element.instance = self;
           self.context.instance = self;
+     }
+    
+     resize(width, height) {
+          self.width = self.element.width = width;
+          self.height = self.element.height = height;
+
+          if(self.osc) {
+               self.osc.width = width;
+               self.osc.height = height;
+          }
      }
 
      get store() {
