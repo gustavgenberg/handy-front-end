@@ -198,6 +198,7 @@ class Canvas {
           if(!document.getElementById(self.id) && !offscreen) document.body.appendChild(self.element);
 
           self.listeners = new EventEmitter();
+          self.on = self.listeners.on.bind(self.listeners);
 
           // self.stats = new Stats();
 
