@@ -1,6 +1,50 @@
 const date = new Date();
 const time = date.getTime.bind(date);
 
+var EventEmitter = function () {
+    this.events = {};
+};
+
+EventEmitter.prototype.on = function (event, listener) {
+    if (typeof this.events[event] !== 'object') {
+        this.events[event] = [];
+    }
+
+    this.events[event].push(listener);
+};
+
+EventEmitter.prototype.removeListener = function (event, listener) {
+    var idx;
+
+    if (typeof this.events[event] === 'object') {
+        idx = indexOf(this.events[event], listener);
+
+        if (idx > -1) {
+            this.events[event].splice(idx, 1);
+        }
+    }
+};
+
+EventEmitter.prototype.emit = function (event) {
+    var i, listeners, length, args = [].slice.call(arguments, 1);
+
+    if (typeof this.events[event] === 'object') {
+        listeners = this.events[event].slice();
+        length = listeners.length;
+
+        for (i = 0; i < length; i++) {
+            listeners[i].apply(this, args);
+        }
+    }
+};
+
+EventEmitter.prototype.once = function (event, listener) {
+    this.on(event, function g () {
+        this.removeListener(event, g);
+        listener.apply(this, arguments);
+    });
+};
+
 CanvasRenderingContext2D && (CanvasRenderingContext2D.prototype.reset = function () {
      this.setTransform(1, 0, 0, 1, 0, 0)
 }, CanvasRenderingContext2D.prototype.clear = function (preserveTransform) {
@@ -153,7 +197,7 @@ class Canvas {
 
           if(!document.getElementById(self.id) && !offscreen) document.body.appendChild(self.element);
 
-          self.listeners = new CallbackHandler(self);
+          self.listeners = new EventEmitter();
 
           // self.stats = new Stats();
 
@@ -212,8 +256,8 @@ class Canvas {
 
           // self.stats.begin();
 
-          if(!self.isPaused) self.listeners.trigger('update', delta, self.__STORE__);
-          self.listeners.trigger('draw', self.context, delta, self.__STORE__);
+          if(!self.isPaused) self.listeners.emit('update', delta, self.__STORE__);
+          self.listeners.emit('draw', self.context, delta, self.__STORE__);
 
           if(self.osc) {
                self.element.context.clearRect(0, 0, self.width, self.height);
