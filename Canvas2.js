@@ -1,5 +1,4 @@
-const date = new Date();
-const time = date.getTime.bind(date);
+const time = () => new Date().getTime();
 
 var EventEmitter = function () {
     this.events = {};
